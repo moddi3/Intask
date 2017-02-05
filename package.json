@@ -1,0 +1,47 @@
+{
+  "name": "todo-vue",
+  "description": "todo app",
+  "version": "1.0.0",
+  "author": "moddi3 <vlad211099@gmail.com>",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon server/server.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.22.0",
+    "babel-runtime": "^6.22.0",
+    "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.8.1",
+    "mongoose-url-slugs": "^0.2.1",
+    "morgan": "^1.7.0",
+    "vue": "^2.1.0",
+    "vue-resource": "^1.1.2",
+    "vue-router": "^2.2.0",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.14.1",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-vue": "^2.0.1",
+    "express": "^4.14.1",
+    "file-loader": "^0.9.0",
+    "vue-loader": "^10.0.0",
+    "vue-template-compiler": "^2.1.0",
+    "webpack": "^2.2.0",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.16.1"
+  }
+}
