@@ -13,8 +13,6 @@ router.get(   '/todos/:id', todo.find);
 
 router.put(   '/todos/:id', todo.update);
 
-// router.delete('/todos',     todo.deleteAll);
-
 router.delete('/todos/:id', todo.delete);
 
 module.exports = router;

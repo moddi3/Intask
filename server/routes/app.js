@@ -7,8 +7,6 @@ router.get(   '/',     todo.all);
 
 router.post(  '/',     todo.create);
 
-// router.get(   '/:slug', todo.edit);
-
 router.put(  '/:slug', todo.update);
 
 router.delete('/:slug', todo.delete);

@@ -1,6 +1,5 @@
 var Todo = require('../models/Todo');
 var log = require('../config/log')(module);
-var URLSlugs = require('mongoose-url-slugs');
 
 exports.index = function(req, res){
   res.json({
@@ -43,22 +42,6 @@ exports.create = function(req, res) {
     }
   });
 }
-
-// exports.edit = function(req, res) {
-//   Todo.edit(req.params.slug, function(err, todo) {
-//     if (!err) {
-//       res.render( 'edit', {
-//         title   : 'edit page ' + req.params.slug,
-//         todos   : todo,
-//         current : req.params.slug
-//       });
-//     } else {
-//       res.statusCode = 500;
-//       log.error('Internal error(%d): %s', res.statusCode, err.message);
-//       return res.send({error: 'Server error'});
-//     }
-//   });
-// }
 
 exports.update = function(req, res) {
   Todo.find(req.params.slug, function(err, todo) {

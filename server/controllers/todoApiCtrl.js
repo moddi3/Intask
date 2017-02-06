@@ -1,6 +1,5 @@
 var Todo = require('../models/Todo');
 var log = require('../config/log')(module);
-var URLSlugs = require('mongoose-url-slugs');
 
 exports.index = function(req, res){
   res.json({
@@ -106,12 +105,3 @@ exports.delete = function(req, res) {
     });
   });
 }
-
-// exports.deleteAll = function(req, res) {
-//   Todo.remove({}, function(err, todos) {
-//     if (!todos) {
-//       res.statusCode = 404;
-//       return res.send({error: 'Not found'});
-//     }
-//   });
-// }
