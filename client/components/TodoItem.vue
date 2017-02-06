@@ -12,7 +12,6 @@ export default {
   props: ['todo'],
   data: function() {
     return {
-      // state: false
     }
   },
   methods: {
@@ -32,6 +31,7 @@ export default {
 }
 </script>
 <style>
+
 input[type='checkbox'] {
   float: left;
 }
@@ -39,12 +39,6 @@ input[type='checkbox'] {
 button {
   float: right;
 }
-
-
-/*li{
-  border: 1px solid #505050;
-  margin:3px;
-}*/
 
 .completed {
   text-decoration: line-through;
