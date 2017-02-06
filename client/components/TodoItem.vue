@@ -1,9 +1,7 @@
 <template>
 <li>
-  <input type="checkbox" v-model="todo.state" @change="updateTodo(todo.slug)">
-  <transition name="fade">
-    <label :class="{ completed:todo.state }"> {{ todo.content }} </label>
-  </transition>
+  <input type="checkbox" v-model="todo.state" @change="updateTodo(todo._id)">
+  <label :class="{ completed:todo.state }"> {{ todo.content }} </label>
   <button class="delete" @click="removeTodo(todo._id)">X</button>
 </li>
 </template>
@@ -19,22 +17,16 @@ export default {
   },
   methods: {
     removeTodo: function(id) {
-      this.$emit('remove', id);
+      this.$emit('remove', id)
     },
     updateTodo: function(id) {
       let data = this.todo.content
       let state = this.todo.state
-      this.$http.put(`api/todos/${id}`, {
-        content: data,
-        state: state
-      }).then(
-        function(response) {
-          console.log('Success!:', response.status)
-        },
-        function(response) {
-          console.log('Error!:', response)
-        }
-      )
+      this.axios.put(`api/todos/${id}`, {
+          content: data,
+          state: state
+        }).then(res => { console.log('Success!:', res.status)})
+          .catch(res => console.log('Error!:', res.status))
     },
   }
 }
@@ -43,6 +35,16 @@ export default {
 input[type='checkbox'] {
   float: left;
 }
+
+button {
+  float: right;
+}
+
+
+/*li{
+  border: 1px solid #505050;
+  margin:3px;
+}*/
 
 .completed {
   text-decoration: line-through;

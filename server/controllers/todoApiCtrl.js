@@ -58,14 +58,13 @@ exports.find = function(req, res) {
 }
 
 exports.update = function(req, res) {
-  Todo.find(req.params.id, function(err, todo) {
+  Todo.update(req.params.id, function(err, todo) {
     if (!todo) {
       res.statusCode = 404;
       return res.send({error: 'Not found'});
     }
     todo.content = req.body.content;
     todo.state = req.body.state;
-    todo.modified = Date.now();
     return todo.save(function(err) {
       if (!err) {
         log.info("todo updated");
@@ -93,6 +92,7 @@ exports.delete = function(req, res) {
     return todo.remove(function (err) {
       if (!err) {
         log.info("todo deleted");
+        return res.send({status: 'OK', todo: todo});
       } else {
         if (err.name == 'ValidationError') {
           res.statusCode = 400;
