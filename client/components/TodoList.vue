@@ -10,17 +10,17 @@ import TodoItem from './TodoItem.vue'
 
 export default {
   name: 'todo-list',
-  data: function(content) {
+  data: function() {
     return {
       todos: [],
       newTodo: {
-        content: content,
+        content: '',
         modified: new Date(),
         state: false
       }
     }
   },
-  mounted: function() {
+  created: function() {
     this.getTodos()
   },
   components: {
