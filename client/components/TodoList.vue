@@ -15,6 +15,7 @@ export default {
       todos: [],
       newTodo: {
         content: content,
+        modified: new Date(),
         state: false
       }
     }
@@ -53,6 +54,7 @@ export default {
         todos.unshift({
           _id: id,
           content: todo.content,
+          modified: todo.modified,
           state: todo.state
         })
         console.log('Success!:', res.status)

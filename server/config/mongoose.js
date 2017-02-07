@@ -19,6 +19,7 @@ var Schema = mongoose.Schema;
 var TodoSchema = new Schema({
   content: { type: String, default: '', required: true, trim: true},
   state:  { type: Boolean, default: false },
+  modified: { type: Date, default: Date.now }
 },{ versionKey: false});
 
 var Todo = mongoose.model('Todo', TodoSchema);
