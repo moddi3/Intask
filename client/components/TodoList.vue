@@ -38,7 +38,7 @@ export default {
       this.axios.delete(`api/todos/${id}`).then(
           res => {
             self.getTodos()
-            console.log('Success!:', res.status)
+            console.log('Success! Deleted!:', res.status)
           })
         .catch(res => console.log('Error!:', res.status))
     },
@@ -57,7 +57,7 @@ export default {
           modified: todo.modified,
           state: todo.state
         })
-        console.log('Success!:', res.status)
+        console.log('Success! Added:', res.status)
         todo.content = ''
       }).catch(res => console.log('Error!:', res.status))
     }

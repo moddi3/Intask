@@ -1,5 +1,5 @@
 var Todo = require('../models/Todo');
-var log = require('../config/log')(module);
+var log  = require('../config/log')(module);
 
 exports.index = function(req, res){
   res.json({

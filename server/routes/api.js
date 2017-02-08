@@ -11,7 +11,7 @@ router.post(  '/todos',     todo.create);
 
 router.get(   '/todos/:id', todo.find);
 
-router.put(   '/todos/:id', todo.update);
+router.put( '/todos/:id', todo.update);
 
 router.delete('/todos/:id', todo.delete);
 
