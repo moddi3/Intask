@@ -6,22 +6,18 @@
 </template>
 
 <script>
-  import TodoList from './TodoList.vue'
+  import TodoList from './TodoList.vue';
 
   export default {
     name: 'app',
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-      }
-    },
     components: {
-      TodoList
-    }
-  }
+      TodoList,
+    },
+  };
 </script>
 
 <style>
+html,body { height: 100%; }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -29,25 +25,13 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-    width: 200px;
+    height: 100%;
+    width: 100%;
     margin: 0 auto;
   }
   
   h1,
   h2 {
     font-weight: normal;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin: 0 10px;
-  }
-  
-  a {
-    color: #42b983;
   }
 </style>

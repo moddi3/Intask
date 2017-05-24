@@ -1,27 +1,26 @@
-var mongoose = require('mongoose');
-var log      = require('./log')(module);
+import mongoose from 'mongoose';
+import log from 'winston';
 
 // mongoose.connect('mongodb://moddi3:vittmasterkey@ds017070.mlab.com:17070/vitt');
 mongoose.connect('mongodb://localhost/vitt');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
-db.on('error', function(err) {
+db.on('error', (err) => {
   log.error('connection error:', err.message);
 });
-db.once('open', function callback() {
-  log.info("Connected to DB!");
+db.once('open', () => {
+  log.info('Connected to DB!');
 });
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
+const TodoSchema = new Schema({
+  content: { type: String, default: '', required: true, trim: true },
+  state: { type: Boolean, default: false },
+  modified: { type: Date, default: Date.now },
+}, { versionKey: false });
 
-var TodoSchema = new Schema({
-  content:  { type: String, default:  '', required: true, trim: true},
-  state:    { type: Boolean, default: false },
-  modified: { type: Date, default:    Date.now }
-},{ versionKey: false});
+const Todo = mongoose.model('Todo', TodoSchema);
 
-var Todo = mongoose.model('Todo', TodoSchema);
-
-module.exports.Todo = Todo;
+export default Todo;

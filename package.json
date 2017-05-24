@@ -5,41 +5,43 @@
   "author": "moddi3 <vlad211099@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "yarn dev:start",
+    "dev:start": "nodemon --ignore lib --exec babel-node server/server.js",
+    "test": "eslint --ext .vue, .js client/ server/*"
   },
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.16.1",
     "babel-polyfill": "^6.22.0",
-    "babel-runtime": "^6.22.0",
     "body-parser": "^1.16.0",
+    "compression": "^1.6.2",
     "ejs": "^2.5.5",
+    "express": "^4.15.3",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.1",
-    "morgan": "^1.7.0",
-    "vue": "^2.1.0",
-    "vue-axios": "^1.2.2",
-    "vue-router": "^2.2.0",
-    "vuex": "^2.1.2",
-    "winston": "^2.3.1"
+    "vue": "^2.3.3",
+    "vue-router": "^2.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.0.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.0.0",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-es2015": "^6.0.0",
-    "babel-preset-stage-0": "^6.22.0",
-    "css-loader": "^0.25.0",
-    "eslint": "^3.14.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "css-loader": "^0.28.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.3",
+    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-vue": "^2.0.1",
-    "express": "^4.14.1",
-    "file-loader": "^0.9.0",
-    "vue-loader": "^10.0.0",
+    "file-loader": "^0.11.1",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "morgan": "^1.8.1",
+    "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0",
     "webpack-dev-middleware": "^1.10.0",
-    "webpack-hot-middleware": "^2.16.1"
+    "webpack-hot-middleware": "^2.16.1",
+    "winston": "^2.3.1"
   }
 }

@@ -1,34 +1,29 @@
-var Todo = require('../config/mongoose').Todo;
+/* eslint-disable import/prefer-default-export */
 
-exports.all = function(cb){
-  return Todo
-    .find(function(err, todos) { cb(err, todos); })
-    .sort('-modified')
-}
+import Todo from '../config/mongoose';
 
-exports.create = function(content, cb){
-  var todo = new Todo({
-    content: content,
-  })
-  return todo.save(function(err) {
+export const all = cb => Todo
+  .find((err, todos) => cb(err, todos))
+  .sort('modified');
+
+export const create = (content, cb) => {
+  const todo = new Todo({ content });
+  return todo.save((err) => {
     cb(err, todo);
   });
-}
+};
 
-exports.find = function(id, cb){
-  return Todo.findById(id, function(err, todo) {
-    cb(err, todo);
-  })
-}
-
-exports.update = function(id, cb){
-  return Todo.findById(id, function(err, todo) {
+export const find = (id, cb) => Todo
+  .findById(id, (err, todo) => {
     cb(err, todo);
   });
-}
 
-exports.delete = function(id, cb){
-  return Todo.findById(id, function(err, todo) {
+exports.update = (id, cb) => Todo
+  .findById(id, (err, todo) => {
     cb(err, todo);
   });
-}
+
+exports.delete = (id, cb) => Todo
+  .findById(id, (err, todo) => {
+    cb(err, todo);
+  });
