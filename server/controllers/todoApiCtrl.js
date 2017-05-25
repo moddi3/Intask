@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import log from 'winston';
-import * as Todo from '../models/Todo';
+import Todo from '../models/Todo';
 
 export const index = (req, res) => {
   res.json({
@@ -12,24 +11,16 @@ export const index = (req, res) => {
 };
 
 export const all = (req, res) => {
-  Todo.all((err, todos) => {
-    if (!err) {
-      return res.send(todos);
-    } else {
-      res.statusCode = 500;
-      log.error('Internal error(%d): %s', res.statusCode, err.message);
-      return res.send({ error: 'Server error' });
-    }
+  Todo.find({}, (err, todos) => {
+    if (err) res.send(err);
+    res.json(todos);
   });
 };
 
 export const create = (req, res) => {
-  Todo.create(req.body.content, (err, todo) => {
-    if (!err) {
-      log.info('Todo created');
-      return res.send({ status: 'OK', todo });
-    } else {
-      log.error(err);
+  const newTodo = new Todo(req.body);
+  newTodo.save((err, todo) => {
+    if (err) {
       if (err.name === 'ValidationError') {
         res.statusCode = 400;
         res.send({ error: 'Validation error' });
@@ -37,73 +28,30 @@ export const create = (req, res) => {
         res.statusCode = 500;
         res.send({ error: 'Server error' });
       }
-      log.error('Internal error(%d): %s', res.statusCode, err.message);
     }
+    res.json(todo);
   });
 };
 
 export const find = (req, res) => {
-  Todo.find(req.params.id, (err, todo) => {
-    if (!todo) {
-      res.statusCode = 404;
-      return res.send({ error: 'Not found' });
-    }
-    if (!err) {
-      return res.send({ status: 'OK', todo });
-    } else {
-      res.statusCode = 500;
-      log.error('Internal error(%d): %s', res.statusCode, err.message);
-      return res.send({ error: 'Server error' });
-    }
+  Todo.findById(req.params.id, (err, todo) => {
+    if (err) res.send(err);
+    res.json({ status: 'OK', todo });
   });
 };
 
 export const update = (req, res) => {
-  Todo.update(req.params.id, (err, todo) => {
-    if (!todo) {
-      res.statusCode = 404;
-      return res.send({ error: 'Not found' });
-    }
-    todo.content = req.body.content;
-    todo.state = req.body.state;
-    return todo.save(() => {
-      if (!err) {
-        log.info('todo updated');
-        return res.send({ status: 'OK', todo });
-      } else {
-        if (err.name === 'ValidationError') {
-          res.statusCode = 400;
-          res.send({ error: 'Validation error' });
-        } else {
-          res.statusCode = 500;
-          res.send({ error: 'Server error' });
-        }
-        log.error('Internal error(%d): %s', res.statusCode, err.message);
-      }
-    });
+  Todo.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, todo) => {
+    if (err) res.send(err);
+    res.json(todo);
   });
 };
 
-exports.delete = (req, res) => {
-  Todo.delete(req.params.id, (err, todo) => {
-    if (!todo) {
-      res.statusCode = 404;
-      return res.send({ error: 'Not found' });
+export const remove = (req, res) => {
+  Todo.remove({ _id: req.params.id }, (err) => {
+    if (err) {
+      return res.send(err);
     }
-    return todo.remove(() => {
-      if (!err) {
-        log.info('todo deleted');
-        return res.send({ status: 'OK', todo });
-      } else {
-        if (err.name === 'ValidationError') {
-          res.statusCode = 400;
-          res.send({ error: 'Validation error' });
-        } else {
-          res.statusCode = 500;
-          res.send({ error: 'Server error' });
-        }
-        log.error('Internal error(%d): %s', res.statusCode, err.message);
-      }
-    });
+    return res.json({ message: 'Task successfully deleted' });
   });
 };
