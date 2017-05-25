@@ -13,14 +13,4 @@ db.once('open', () => {
   log.info('Connected to DB!');
 });
 
-const Schema = mongoose.Schema;
-
-const TodoSchema = new Schema({
-  content: { type: String, default: '', required: true, trim: true },
-  state: { type: Boolean, default: false },
-  modified: { type: Date, default: Date.now },
-}, { versionKey: false });
-
-const Todo = mongoose.model('Todo', TodoSchema);
-
-export default Todo;
+export default mongoose;
