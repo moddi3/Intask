@@ -1,29 +1,13 @@
-/* eslint-disable import/prefer-default-export */
+import mongoose from '../config/mongoose';
 
-import Todo from '../config/mongoose';
+const Schema = mongoose.Schema;
 
-export const all = cb => Todo
-  .find((err, todos) => cb(err, todos))
-  .sort('modified');
+const TodoSchema = new Schema({
+  content: { type: String, required: true, trim: true },
+  state: { type: Boolean, default: false },
+  created: { type: Date, default: Date.now },
+}, { versionKey: false });
 
-export const create = (content, cb) => {
-  const todo = new Todo({ content });
-  return todo.save((err) => {
-    cb(err, todo);
-  });
-};
+const Todo = mongoose.model('Todo', TodoSchema);
 
-export const find = (id, cb) => Todo
-  .findById(id, (err, todo) => {
-    cb(err, todo);
-  });
-
-exports.update = (id, cb) => Todo
-  .findById(id, (err, todo) => {
-    cb(err, todo);
-  });
-
-exports.delete = (id, cb) => Todo
-  .findById(id, (err, todo) => {
-    cb(err, todo);
-  });
+export default Todo;
