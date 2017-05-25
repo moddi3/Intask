@@ -1,9 +1,9 @@
 <template>
-  <li :class="[todo.state ? 'completed' : 'uncompleted']">
-    <input type="checkbox" v-model="todo.state" @change="updateTodo(todo._id)">
-    <label for="checkbox" :class="{ completed: todo.state}" class="edited" v-if="todo !== editedTodo" @dblclick="editTodo(todo)">{{ todo.content }}</label>
+  <li :class="[todo.state ? 'completed' : 'uncompleted']" @dblclick="editTodo(todo)">
+    <input type="checkbox" name="checkbox" v-model="todo.state" @change="updateTodo(todo._id)">
+    <label for="checkbox" :class="{ completed: todo.state}" v-if="todo !== editedTodo" >{{ todo.content }}</label>
     <button class="delete" @click="removeTodo(todo._id)">X</button>
-    <input type="text" v-model="todo.content" v-if="todo === editedTodo" v-focus autofocus @keyup.enter="endEditing(todo)" @blur="endEditing(todo)">
+    <input type="text" id="edit" v-model="todo.content" v-if="todo === editedTodo" autofocus @keyup.enter="endEditing(todo)" @blur="endEditing(todo)">
   </li>
 </template>
 
@@ -24,6 +24,13 @@ export default {
     },
     editTodo(todo) {
       this.editedTodo = todo;
+      this.focusOnEdit();
+    },
+    focusOnEdit() {
+      this.$nextTick(() => {
+        const el = document.getElementById('edit');
+        if (el) el.focus();
+      });
     },
     endEditing(todo) {
       this.editedTodo = null;
@@ -32,16 +39,8 @@ export default {
       } else this.updateTodo(todo._id);
     },
     updateTodo(id) {
-      const content = this.todo.content;
-      const state = this.todo.state;
-      axios.put(`api/todos/${id}`, { content, state });
-    },
-  },
-  directives: {
-    focus: (el, binding) => {
-      if (binding.value) {
-        el.focus();
-      }
+      const todo = this.todo;
+      axios.put(`api/todos/${id}`, todo);
     },
   },
 };
