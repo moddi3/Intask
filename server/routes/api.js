@@ -12,6 +12,6 @@ router.get('/todos/:id', todo.find);
 
 router.put('/todos/:id', todo.update);
 
-router.delete('/todos/:id', todo.delete);
+router.delete('/todos/:id', todo.remove);
 
 export default router;
