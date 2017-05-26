@@ -4,7 +4,7 @@ import Todo from '../models/Todo';
 
 export const index = (req, res) => {
   res.json({
-    name: 'project initium v.0.0.1',
+    name: 'project intask v.0.0.1',
     apiVer: '0.0.1',
     date: Date(),
   });
@@ -20,14 +20,12 @@ export const all = (req, res) => {
 export const create = (req, res) => {
   const newTodo = new Todo(req.body);
   newTodo.save((err, todo) => {
-    if (err) {
-      if (err.name === 'ValidationError') {
-        res.statusCode = 400;
-        res.send({ error: 'Validation error' });
-      } else {
-        res.statusCode = 500;
-        res.send({ error: 'Server error' });
-      }
+    if (err && err.name === 'ValidationError') {
+      res.statusCode = 400;
+      res.send({ error: 'Validation error' });
+    } else if (err) {
+      res.statusCode = 500;
+      res.send({ error: 'Server error' });
     }
     res.json(todo);
   });
