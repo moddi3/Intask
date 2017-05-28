@@ -56,14 +56,19 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url-loader',
       },
     ],
   },
   resolve: {
+    extensions: ['.js', '.vue'],
     alias: {
       vue$: 'vue/dist/vue.common.js',
-      '@': path.join(__dirname, '..', 'src'),
+      '@': path.join(__dirname, '..', 'client'),
     },
   },
   performance: {
