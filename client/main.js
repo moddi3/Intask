@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+
+import 'normalize.css/normalize.css';
+import 'font-awesome/css/font-awesome.css';
 
 import App from './components/App.vue';
-
-Vue.use(VueRouter);
 
 /* eslint-disable no-new */
 new Vue({
