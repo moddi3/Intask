@@ -1,0 +1,33 @@
+@keyframes shake3D {
+  10%, 90% {
+    transform: translate3d(-2px, -4px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 4px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, -4px, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 4px, 0);
+  }
+}
+
+/* Complete animation */
+@keyframes complete {
+  0% {
+    height: 0;
+    width: 0;
+  }
+  25% {
+    height: 0;
+    width: 5px;
+  }
+  50% {
+    height: 11px;
+    width: 5px;
+  }
+}
