@@ -1,10 +1,29 @@
 <template>
-  <li :class="[todo.state ? 'completed' : 'uncompleted']" @dblclick="editTodo(todo)">
-    <input type="checkbox" name="checkbox" v-model="todo.state" @change="updateTodo(todo._id)">
-    <label for="checkbox" :class="{ completed: todo.state}" v-if="todo !== editedTodo" >{{ todo.content }}</label>
-    <button class="delete" @click="removeTodo(todo._id)">X</button>
-    <input type="text" id="edit" v-model="todo.content" v-if="todo === editedTodo" autofocus @keyup.enter="endEditing(todo)" @blur="endEditing(todo)">
-  </li>
+  <div class="task-item" :class="{'task-item__completed': todo.state, 'task-item_editing': this.editedTodo !== null}">
+    <div class="cell">
+      <input type="checkbox" :id="todo._id" v-model="todo.state" @change="updateTodo(todo._id)">
+      <label :for="todo._id" class="task-item__complete-button" v-if="todo !== editedTodo">
+        <span></span>
+      </label>
+    </div>
+    <div class="cell" @dblclick="editTodo(todo)">
+      <div class="task-item__content" v-if="todo !== editedTodo">{{ todo.content }}</div>
+      <input
+        class="task-item__input"
+        id="editing"
+        type="text"
+        v-model="todo.content" 
+        v-if="todo === editedTodo"
+        autofocus
+        @keyup.esc="endEditing(todo)"
+        @keyup.enter="endEditing(todo)"
+        @blur="endEditing(todo)"
+      >
+    </div>
+    <div class="cell">
+      <button type="button" class="delete" @click="removeTodo(todo._id)"><span></span></button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -19,6 +38,7 @@ export default {
     };
   },
   methods: {
+    // completeTodo
     removeTodo(id) {
       this.$emit('remove', id);
     },
@@ -26,17 +46,19 @@ export default {
       this.editedTodo = todo;
       this.focusOnEdit();
     },
+    endEditing(todo) {
+      if (todo.content.trim() === '') {
+        this.editedTodo = null;
+        this.removeTodo(todo._id);
+      } else if (this.editedTodo === todo) {
+        this.editedTodo = null;
+      } else this.updateTodo(todo._id);
+    },
     focusOnEdit() {
       this.$nextTick(() => {
-        const el = document.getElementById('edit');
+        const el = document.getElementById('editing');
         if (el) el.focus();
       });
-    },
-    endEditing(todo) {
-      this.editedTodo = null;
-      if (todo.content.trim() === '') {
-        this.removeTodo(todo._id);
-      } else this.updateTodo(todo._id);
     },
     updateTodo(id) {
       const todo = this.todo;
@@ -45,24 +67,3 @@ export default {
   },
 };
 </script>
-<style>
-input[type='checkbox'] {
-  float: left;
-}
-
-button {
-  float: right;
-}
-
-.edited {
-  display: inline-block;
-  width: 90%;
-  color: #606060;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.completed {
-  text-decoration: line-through;
-}
-</style>
