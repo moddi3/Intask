@@ -1,6 +1,6 @@
 {
   "name": "todo-vue",
-  "description": "todo app",
+  "description": "ToDo List App",
   "version": "1.0.0",
   "author": "moddi3 <vlad211099@gmail.com>",
   "private": true,
@@ -16,15 +16,19 @@
     "compression": "^1.6.2",
     "ejs": "^2.5.5",
     "express": "^4.15.3",
+    "font-awesome": "^4.7.0",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.1",
+    "normalize.css": "^7.0.0",
     "vue": "^2.3.3",
     "vue-router": "^2.2.0"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.1",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.5.1",
     "css-loader": "^0.28.1",
     "eslint": "^3.19.0",
@@ -37,11 +41,19 @@
     "file-loader": "^0.11.1",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "morgan": "^1.8.1",
+    "postcss-loader": "^2.0.5",
+    "style-loader": "^0.18.1",
+    "url-loader": "^0.5.8",
     "vue-loader": "^12.1.0",
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
     "winston": "^2.3.1"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
